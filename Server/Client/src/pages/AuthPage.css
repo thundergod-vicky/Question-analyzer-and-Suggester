@@ -1,0 +1,188 @@
+.auth-container {
+  min-height: 100vh;
+  background-color: #050510;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Cinematic Background Blobs */
+.bg-blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--accent-primary), transparent 70%);
+  filter: blur(80px);
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blob-1 { top: -10%; left: -10%; animation: float 15s infinite ease-in-out; }
+.blob-2 { bottom: -10%; right: -10%; background: radial-gradient(circle, var(--accent-secondary), transparent 70%); animation: float 18s infinite ease-in-out reverse; }
+.blob-3 { top: 40%; left: 50%; width: 300px; height: 300px; background: radial-gradient(circle, var(--accent-tertiary), transparent 70%); opacity: 0.1; }
+
+.back-link {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  z-index: 10;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.back-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(-5px);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  background: rgba(15, 15, 35, 0.7);
+  backdrop-filter: blur(25px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  padding: 50px;
+  box-shadow: 
+    0 40px 100px -20px rgba(0, 0, 0, 0.6),
+    inset 0 0 40px rgba(99, 102, 241, 0.05);
+  position: relative;
+  z-index: 5;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.auth-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  background: var(--gradient-primary);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  color: white;
+  box-shadow: 
+    0 0 30px rgba(99, 102, 241, 0.4),
+    inset 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.auth-header h1 {
+  font-size: 2.2rem;
+  letter-spacing: -1px;
+  margin-bottom: 10px;
+  background: linear-gradient(to bottom, #fff 30%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.auth-header p {
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.input-wrapper input {
+  width: 100%;
+  background: rgba(10, 10, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px 16px 16px 52px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-wrapper input:focus {
+  border-color: var(--accent-primary);
+  background: rgba(10, 10, 20, 0.9);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+  outline: none;
+}
+
+.input-wrapper input:focus + .input-icon {
+  color: var(--accent-primary);
+}
+
+.btn-primary.btn-block {
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+.auth-footer {
+  margin-top: 35px;
+  font-size: 0.95rem;
+}
+
+.auth-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--accent-primary);
+  font-weight: 700;
+  margin-left: 4px;
+  transition: all 0.3s;
+  font-size: inherit;
+}
+
+.auth-toggle:hover {
+  color: var(--accent-secondary);
+  text-decoration: none;
+  filter: drop-shadow(0 0 8px var(--accent-primary));
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 35px 25px;
+    border-radius: 20px;
+  }
+  .back-link {
+    top: 20px;
+    left: 20px;
+  }
+}
