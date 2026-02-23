@@ -13,7 +13,7 @@ load_dotenv()
 # We will run this in threads to avoid blocking the event loop
 client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
-    timeout=60.0,
+    timeout=300.0,
     max_retries=5
 )
 
@@ -45,7 +45,7 @@ async def analyze_questions(extracted_texts: list[str], api_key: str = None, use
     """Analyze question papers and return pattern analysis."""
     c = client
     if api_key:
-        c = OpenAI(api_key=api_key, timeout=60.0)
+        c = OpenAI(api_key=api_key, timeout=300.0)
 
     combined_text = "\n\n---PAPER SEPARATOR---\n\n".join(extracted_texts)
 
@@ -116,7 +116,7 @@ async def generate_question_paper(analysis: dict, api_key: str = None, user_id: 
     """Generate a predicted question paper based on analysis."""
     c = client
     if api_key:
-        c = OpenAI(api_key=api_key, timeout=60.0)
+        c = OpenAI(api_key=api_key, timeout=300.0)
 
     prompt = f"""You are an expert academic question paper setter. Based on the following analysis of past question papers, create a comprehensive predicted question paper for this year.
 
@@ -188,7 +188,7 @@ async def generate_answers(paper: dict, api_key: str = None, user_id: int = None
     """Generate mark-appropriate answers for each question."""
     c = client
     if api_key:
-        c = OpenAI(api_key=api_key, timeout=60.0)
+        c = OpenAI(api_key=api_key, timeout=300.0)
 
     all_questions = []
     for section in paper.get("sections", []):

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const api = axios.create({
   baseURL: '/api',
-  timeout: 120000, // 2 min for AI calls
+  timeout: 300000, // 5 min for AI calls
 })
 
 // Add token to requests
