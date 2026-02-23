@@ -136,17 +136,42 @@ export const getAnswers = async (sessionId: string): Promise<AnswerSet> => {
   return data
 }
 
-export const downloadQuestionPDF = (sessionId: string) => {
-  // We need to use authenticated access for PDF download too, 
-  // but window.open doesn't easily support headers.
-  // One way is to use a temporary blob or a specialized route.
-  // For now, let's keep it simple and assume the backend can handle it 
-  // if we pass the token in query params if needed, or stick to standard download.
-  window.open(`/api/pdf/questions/${sessionId}`, '_blank')
+export const downloadQuestionPDF = async (sessionId: string) => {
+  try {
+    const { data } = await api.get(`/pdf/questions/${sessionId}`, {
+      responseType: 'blob'
+    })
+    const url = window.URL.createObjectURL(new Blob([data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', `Question_Paper_${sessionId}.pdf`)
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Download failed:', error)
+    throw error
+  }
 }
 
-export const downloadAnswerPDF = (sessionId: string) => {
-  window.open(`/api/pdf/answers/${sessionId}`, '_blank')
+export const downloadAnswerPDF = async (sessionId: string) => {
+  try {
+    const { data } = await api.get(`/pdf/answers/${sessionId}`, {
+      responseType: 'blob'
+    })
+    const url = window.URL.createObjectURL(new Blob([data]))
+    const link = document.createElement('a')
+    link.href = url
+    link.setAttribute('download', `Answers_${sessionId}.pdf`)
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('Download failed:', error)
+    throw error
+  }
 }
 
 export default api
